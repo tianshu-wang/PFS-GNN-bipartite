@@ -8,3 +8,4 @@ train.py: Train the GNN with an arbitrary loss function.
 brute.py: Brute force method
 
 # Example of input data 
+pair.txt: Relation between targets and fibers. Each line corresponds to a galaxy in the field
