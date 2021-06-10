@@ -1,5 +1,5 @@
 # PFS-GNN-bipartite
-to_graph: Convert the connectivity information into graphs
+to_graph: Convert the connectivity information (pair.txt) and the galaxy information (utils.txt) into graphs (graph.pt)
 
 gnn.py: Define the bipartite graph class and GNN strutures
 
