@@ -66,13 +66,11 @@ class HModel(torch.nn.Module):
         out = torch.cat([x_g[tgt],edge_attr], dim=1)
         out = self.node_mlp_1(out)
         ns = torch.ones(len(out),1).float().cuda() 
-        n = scatter(ns, src, dim=0, dim_size=x_h.size(0),reduce='sum')
-        #a = scatter(out, src, dim=0, dim_size=x_h.size(0),reduce='sum') # mu
+        n = scatter(ns, src, dim=0, dim_size=x_h.size(0),reduce='sum') # num
         a = scatter(out, src, dim=0, dim_size=x_h.size(0),reduce='mean') # mu
         b = torch.sqrt(1e-6+F.relu(scatter(out**2, src, dim=0, dim_size=x_h.size(0),reduce='mean')-a**2)) # sigma
         c = scatter((out-a[src])**3, src, dim=0, dim_size=x_h.size(0),reduce='mean')/b**3 #skewness
         d = scatter((out-a[src])**4, src, dim=0, dim_size=x_h.size(0),reduce='mean')/b**4 #kurtosis
-        #out = torch.cat([x_h,a,u[batch_h]], dim=1)
         out = torch.cat([x_h,n,a,b,c,d,u[batch_h]], dim=1)
         out = self.node_mlp_2(out)
         return out
@@ -149,7 +147,6 @@ class GNN(torch.nn.Module):
         edge_attr = data.edge_attr
         u = data.u
 
-
         x_h,x_g,edge_attr,u = self.block_1(x_h,x_g,edge_index,edge_attr,u,batch_e,batch_h,batch_g)
         x_h = self.bn_xh_1(x_h)
         x_g = self.bn_xg_1(x_g)
@@ -174,6 +171,7 @@ class GNN(torch.nn.Module):
 
         time = torch.sum(Tmax*torch.sigmoid(edge_attr),dim=-1)
 
+        # Noisy Sigmoid
         if train:
             noise = self.noiselevel*(torch.rand(time.shape).float().cuda()-0.5)
             time = time+noise
