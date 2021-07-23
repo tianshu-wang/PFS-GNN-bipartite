@@ -1,5 +1,11 @@
 # PFS-GNN-bipartite
 
+The data are too large for github. Only two example graphs (one for each case) are uploaded here.
+
+To run the code, choose one of the config file, then run "python train.py". The graphs are constructed for gpu so you need a gpu to use them.
+
+# Brief Descriptions of the Files
+
 gnn.py : Define the bipartite graph and the GNN.
 
 train.py : The main file to run the code.
@@ -12,6 +18,4 @@ construct_graph.py : Construct the graph. The connectivity and the initializatio
 
 load.py: Load the graphs. Currently we only support batchsize = 1. To do a batched training, merge multiple graphs into a single one in the graph construction step.
 
-The data are too large for github. Only two example graphs (one for each case) are uploaded here.
 
-To run the code, choose one of the config file, then run "python train.py". The graphs are constructed for gpu so you need a gpu to use them.
