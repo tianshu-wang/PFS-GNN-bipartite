@@ -10,4 +10,6 @@ brute.py : Brute force method.
 
 to_graph : Construct the graph. The connectivity and the initialization of the graph will depend on the problem.
 
+load.py: Load the graphs. Currently we only support batchsize = 1. To do a batched training, simply concatenate multiple graphs in the graph construction step.
+
 The data are too large for github, so they are not included here.
