@@ -8,7 +8,7 @@ train.py : The main file to run the code.
 
 brute.py : Brute force method.
 
-to_graph : Construct the graph. The connectivity and the initialization of the graph will depend on the problem.
+construct_graph : Construct the graph. The connectivity and the initialization of the graph will depend on the problem.
 
 load.py: Load the graphs. Currently we only support batchsize = 1. To do a batched training, simply concatenate multiple graphs in the graph construction step.
 
