@@ -38,6 +38,7 @@ if __name__ == '__main__':
 
     if not os.path.exists('graphs-%s/'%case):
         os.system('mkdir graphs-%s'%case)
-                   
-    graph = to_Graph(indices[args],utils[args])
-    torch.save(graph,names[k].replace('pairs-%s/pair'%case,'graphs-%s/graph'%case).replace('txt','pt'))
+    for k in range(len(names)):
+        indices = np.loadtxt(names[k],dtype=int)
+        graph = to_Graph(indices[args],utils[args])
+        torch.save(graph,names[k].replace('pairs-%s/pair'%case,'graphs-%s/graph'%case).replace('txt','pt'))
