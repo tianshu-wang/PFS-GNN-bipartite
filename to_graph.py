@@ -21,14 +21,14 @@ def to_Graph(indices,properties):
             if index[j]<2394: 
                 e_h.append(index[j])
                 e_g.append(k)
-                edge_attr.append(np.zeros(F_e)) # Edge initialization
+                edge_attr.append(np.zeros(n_x)) # Edge initialization
 
     edge_attr = torch.tensor(edge_attr).float()
     edge_index = torch.tensor([e_h,e_g],dtype=torch.long)
 
-    x_h = torch.zeros(2394,F_xh).float()
+    x_h = torch.zeros(2394,n_h).float()
     x_g = torch.tensor(properties[reachable]).float()
-    u=torch.tensor([np.zeros(F_u)]).float()
+    u=torch.tensor([np.zeros(n_u)]).float()
     data = gnn.BipartiteData(edge_index.cuda(),x_h.cuda(),x_g.cuda(),edge_attr.cuda(),u.cuda())
     return data
 
