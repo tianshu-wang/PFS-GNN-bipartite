@@ -2,7 +2,7 @@
 
 gnn.py : Define the bipartite graph and the GNN.
 
-train.py : The main file.
+train.py : The main file to run the code.
 
 /config : Contain the config files for both cases. To use them, copy the config file to the same directory as the train.py and rename it as config.py
 
