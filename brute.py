@@ -23,8 +23,6 @@ if __name__ == '__main__':
 
     method = 'GD' # GD, SGD or Adam
     train = True # True to train the model. 
-    sharpness = 20
-    noiselevel = 0.2
     nepoch_pre = 50000 # Pre train: softmax, no multiplier updating
     nepoch = 500000 # Softmax, multiplier updating
 
