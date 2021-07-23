@@ -26,17 +26,17 @@ if __name__ == '__main__':
     sharpness = 20
     noiselevel = 0.2
     nepoch_pre = 50000 # Pre train: softmax, no multiplier updating
-    nepoch_softmax = 500000 # Softmax, multiplier updating
+    nepoch = 500000 # Softmax, multiplier updating
 
-    lr_pre = 1e1#2e-5 
+    lr_pre = 1e1 # value for GD. For Adam it's around 1e-4
     penalty_pre = 1e-7 # time constraint strength in pre-training
 
-    lr = 1e1#2e-5
+    lr = 1e1 # value for GD. For Adam it's around 1e-4
     penalty_ini = 1e-7 # Differetial Multiplier Damping, initial
     penalty_end = 1e-4 # Differetial Multiplier Damping, final
 
     # Load data
-    datadir = 'graphs-case1/'
+    datadir = 'graphs-%s/'%case
     graphnames = glob.glob(datadir+'*.pt')
     graphs=[]
     for i in range(ntrain):
@@ -101,9 +101,9 @@ if __name__ == '__main__':
                     print("%d %.3f %.3f %.1f %.1f"%(i_batch,-loss.item(),utils.item(),overtime.item(),undertime.item()))
             print('Pre-Training Finished')
 
-        if nepoch_softmax>0:
+        if nepoch>0:
             ### Softmax ###
-            print('Start Softmax Training')
+            print('Start Training')
             # Load Model
             penalty = penalty_ini
             rate = (penalty_end/penalty_ini)**(1./nepoch_softmax)
@@ -112,7 +112,7 @@ if __name__ == '__main__':
             if method == 'SGD':
                 optimizer = optim.SGD([c_all],lr=lr_pre)
             
-            for i_epoch in range(nepoch_softmax):
+            for i_epoch in range(nepoch:
                 time = Tmax*torch.sigmoid(c_all)
                 if train:
                     noise = noiselevel*(torch.rand(time.shape).float().cuda()-0.5)
