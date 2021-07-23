@@ -40,5 +40,5 @@ if __name__ == '__main__':
         os.system('mkdir graphs-%s'%case)
     for k in range(len(names)):
         indices = np.loadtxt(names[k],dtype=int)
-        graph = to_Graph(indices[args],utils[args])
+        graph = to_Graph(indices,utils)
         torch.save(graph,names[k].replace('pairs-%s/pair'%case,'graphs-%s/graph'%case).replace('txt','pt'))
