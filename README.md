@@ -12,4 +12,4 @@ construct_graph.py : Construct the graph. The connectivity and the initializatio
 
 load.py: Load the graphs. Currently we only support batchsize = 1. To do a batched training, merge multiple graphs into a single one in the graph construction step.
 
-The data are too large for github, so they are not included here.
+The data are too large for github. Only two example graphs (one for each case) are uploaded here.
