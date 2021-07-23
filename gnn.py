@@ -141,16 +141,6 @@ class GNN(torch.nn.Module):
         self.bn_xg_4 = nn.BatchNorm1d(n_g)
         self.bn_e_4= nn.BatchNorm1d(n_x)
 
-        #self.block_5 = Block(EdgeModel(),HModel(),GModel(),GlobalModel())
-        #self.bn_xh_5 = nn.BatchNorm1d(n_h)
-        #self.bn_xg_5 = nn.BatchNorm1d(n_g)
-        #self.bn_e_5= nn.BatchNorm1d(n_x)
-
-        #self.block_6 = Block(EdgeModel(),HModel(),GModel(),GlobalModel())
-        #self.bn_xh_6 = nn.BatchNorm1d(n_h)
-        #self.bn_xg_6 = nn.BatchNorm1d(n_g)
-        #self.bn_e_6= nn.BatchNorm1d(n_x)
-
         self.block_last = Block(EdgeModel_out())
     def forward(self,data,batch_e,batch_h,batch_g,train=True):
         x_h = data.x_h
@@ -179,16 +169,6 @@ class GNN(torch.nn.Module):
         x_h = self.bn_xh_4(x_h)
         x_g = self.bn_xg_4(x_g)
         edge_attr = self.bn_e_4(edge_attr)
-
-        #x_h,x_g,edge_attr,u = self.block_5(x_h,x_g,edge_index,edge_attr,u,batch_e,batch_h,batch_g)
-        #x_h = self.bn_xh_5(x_h)
-        #x_g = self.bn_xg_5(x_g)
-        #edge_attr = self.bn_e_5(edge_attr)
-
-        #x_h,x_g,edge_attr,u = self.block_6(x_h,x_g,edge_index,edge_attr,u,batch_e,batch_h,batch_g)
-        #x_h = self.bn_xh_6(x_h)
-        #x_g = self.bn_xg_6(x_g)
-        #edge_attr = self.bn_e_6(edge_attr)
 
         x_h,x_g,edge_attr,u = self.block_last(x_h,x_g,edge_index,edge_attr,u,batch_e,batch_h,batch_g)
 
